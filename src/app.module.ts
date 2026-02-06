@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService } from '@nestjs/config';
-import { User, Otp } from './models';
-import { UsersModule } from './users/users.module';
-import { AuthModule } from './auth/auth.module';
+import { User, Otp, Rfq, Support } from './models';
+import { UsersModule } from './modules/users/users.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { EmailModule } from './email/email.module';
-import { OtpModule } from './otp/otp.module';
+import { EmailModule } from './modules/email/email.module';
+import { OtpModule } from './modules/otp/otp.module';
+import { RfqModule } from './rfq/rfq.module';
+import { SettingModule } from './setting/setting.module';
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import { OtpModule } from './otp/otp.module';
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
-          entities: [User, Otp],
+          entities: [User, Otp, Rfq, Support],
           synchronize:
             configService.get('NODE_ENV') === 'development' ? true : false,
           logging: true,
@@ -37,6 +39,8 @@ import { OtpModule } from './otp/otp.module';
     AuthModule,
     EmailModule,
     OtpModule,
+    RfqModule,
+    SettingModule,
   ],
   controllers: [AppController],
   providers: [AppService],

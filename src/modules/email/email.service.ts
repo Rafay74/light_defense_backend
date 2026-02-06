@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { OnEvent } from '@nestjs/event-emitter';
 
 import * as nodemailer from 'nodemailer';
-import { emailTemplateForOTP } from 'src/otp/templates';
+import { emailTemplateForOTP } from 'src/modules/otp/templates';
 
 interface IEmail {
   email: string;

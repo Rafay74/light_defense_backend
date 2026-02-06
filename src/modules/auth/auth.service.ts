@@ -11,17 +11,18 @@ import {
   VerifyOtpDto,
 } from './dto';
 
-import { UserService } from 'src/users/users.service';
+import { UserService } from 'src/modules/users/users.service';
+import { OtpService } from 'src/modules/otp/otp.service';
 
 import * as bcrypt from 'bcrypt';
-
-import { OtpService } from 'src/otp/otp.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly otpService: OtpService,
     private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) {}
 
   async registerUser(data: RegisterDTO) {
@@ -57,8 +58,14 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    //generate token here
-    return userExists;
+    // Generate JWT token
+    const payload = { sub: userExists.id, email: userExists.email };
+    const access_token = this.jwtService.sign(payload);
+
+    return {
+      email: userExists.email,
+      access_token,
+    };
   }
 
   async forgotPassword(data: ForgotPasswordDto) {
@@ -100,6 +107,10 @@ export class AuthService {
       userExists.id,
       hashedNewPassword,
     );
+  }
+
+  async getCurrentUser(user_id: string) {
+    return await this.userService.findById(user_id);
   }
 
   async logout() {}

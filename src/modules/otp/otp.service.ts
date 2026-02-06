@@ -1,5 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from 'src/users/users.service';
+import { UserService } from 'src/modules/users/users.service';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Otp } from 'src/models';
 import { Repository } from 'typeorm';
