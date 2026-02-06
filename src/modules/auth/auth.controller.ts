@@ -1,4 +1,13 @@
-import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import {
   ForgotPasswordDto,
@@ -7,6 +16,7 @@ import {
   ResetPasswordDto,
   VerifyOtpDto,
 } from './dto';
+import { JwtGuard } from './guards';
 
 @Controller('auth')
 export class AuthController {
@@ -47,11 +57,11 @@ export class AuthController {
     return this.authService.logout();
   }
 
-  //need to add after jwt module.
-  //   @Get('me')
-  //   @UseGuards(JwtAuthGuard)
-  //   @HttpCode(HttpStatus.OK)
-  //   async getCurrentUser(@Request() req) {
-  //     return this.authService.getCurrentUser(req.user.id);
-  //   }
+  @Get('me')
+  @UseGuards(JwtGuard)
+  @HttpCode(HttpStatus.OK)
+  async getCurrentUser(@Request() req) {
+    const user_id = req?.user.id;
+    return await this.authService.getCurrentUser(user_id);
+  }
 }
