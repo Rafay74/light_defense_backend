@@ -16,7 +16,7 @@ export class TransformResponseInterceptor implements NestInterceptor {
           success: true,
           data: data ?? null,
         };
-      }),
+      })
     );
   }
 }

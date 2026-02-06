@@ -21,7 +21,7 @@ import { OtpService } from 'src/otp/otp.service';
 export class AuthService {
   constructor(
     private readonly otpService: OtpService,
-    private readonly userService: UserService,
+    private readonly userService: UserService
   ) {}
 
   async registerUser(data: RegisterDTO) {
@@ -98,7 +98,7 @@ export class AuthService {
 
     return await this.userService.updatePassword(
       userExists.id,
-      hashedNewPassword,
+      hashedNewPassword
     );
   }
 
