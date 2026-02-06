@@ -66,19 +66,19 @@ export class RfqController {
         } else {
           cb(
             new BadRequestException(
-              'Invalid file type. Only PDF, DOC, and DOCX are allowed.',
+              'Invalid file type. Only PDF, DOC, and DOCX are allowed.'
             ),
-            false,
+            false
           );
         }
       },
-    }),
+    })
   )
   @HttpCode(HttpStatus.CREATED)
   async createRfq(
     @Body() data: CreateRfqDto,
     @Request() req,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File
   ) {
     const user_id = req.user.id;
     return this.rfqService.createRfq(user_id, data, file);

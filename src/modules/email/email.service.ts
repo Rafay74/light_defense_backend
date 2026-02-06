@@ -15,7 +15,7 @@ export class EmailService {
   constructor(
     @Inject('SMTP_TRANSPORTER')
     private readonly transporter: nodemailer.Transporter,
-    private readonly configService: ConfigService,
+    private readonly configService: ConfigService
   ) {}
 
   @OnEvent('OTP_GENERATED')
@@ -31,7 +31,7 @@ export class EmailService {
       const mailOptions = {
         from: this.configService.get(
           'SMTP_FROM',
-          this.configService.get('SMTP_USER'),
+          this.configService.get('SMTP_USER')
         ),
         to: email,
         subject: 'Your OTP Code',

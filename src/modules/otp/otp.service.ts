@@ -11,7 +11,7 @@ export class OtpService {
     @InjectRepository(Otp)
     private readonly otpRepository: Repository<Otp>,
     private readonly userService: UserService,
-    private readonly eventEmitter: EventEmitter2,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   private generateOTPCode(): number {
@@ -21,7 +21,7 @@ export class OtpService {
   private async findOtpAndInvalidate(user) {
     await this.otpRepository.update(
       { userId: user?.id, email: user?.email, used: false },
-      { used: true },
+      { used: true }
     );
   }
 
@@ -107,7 +107,7 @@ export class OtpService {
     const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
     if (recentOtp.updatedAt < fifteenMinutesAgo) {
       throw new UnauthorizedException(
-        'OTP verification expired. Please request a new OTP.',
+        'OTP verification expired. Please request a new OTP.'
       );
     }
 

@@ -8,7 +8,7 @@ import { CreateSupportDto } from './dto';
 export class SettingService {
   constructor(
     @InjectRepository(Support)
-    private readonly supportRepository: Repository<Support>,
+    private readonly supportRepository: Repository<Support>
   ) {}
 
   async getAllSupportRequests() {
@@ -18,7 +18,7 @@ export class SettingService {
   async supportService(
     user_id: string,
     data: CreateSupportDto,
-    file: Express.Multer.File,
+    file: Express.Multer.File
   ) {
     const support = this.supportRepository.create({
       ...data,

@@ -26,7 +26,7 @@ import { EmailService } from './email.service';
           !smtpConfig.auth.pass
         ) {
           throw new Error(
-            'SMTP configuration incomplete. Required: SMTP_HOST, SMTP_USER, SMTP_PASSWORD',
+            'SMTP configuration incomplete. Required: SMTP_HOST, SMTP_USER, SMTP_PASSWORD'
           );
         }
 

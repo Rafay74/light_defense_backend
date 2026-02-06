@@ -21,8 +21,9 @@ import { JwtService } from '@nestjs/jwt';
 export class AuthService {
   constructor(
     private readonly otpService: OtpService,
+
     private readonly userService: UserService,
-    private readonly jwtService: JwtService,
+    private readonly jwtService: JwtService
   ) {}
 
   async registerUser(data: RegisterDTO) {
@@ -105,7 +106,7 @@ export class AuthService {
 
     return await this.userService.updatePassword(
       userExists.id,
-      hashedNewPassword,
+      hashedNewPassword
     );
   }
 
