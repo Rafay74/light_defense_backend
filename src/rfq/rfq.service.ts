@@ -12,7 +12,7 @@ import { CreateRfqDto } from './dto/create-rfq.dto';
 export class RfqService {
   constructor(
     @InjectRepository(Rfq)
-    private readonly rfqRepository: Repository<Rfq>,
+    private readonly rfqRepository: Repository<Rfq>
   ) {}
 
   async getRfq(id: string): Promise<Rfq> {
@@ -31,7 +31,7 @@ export class RfqService {
   async createRfq(
     user_id: string,
     data: CreateRfqDto,
-    file: Express.Multer.File,
+    file: Express.Multer.File
   ) {
     if (!file || !file.path) {
       throw new BadRequestException('File upload failed');

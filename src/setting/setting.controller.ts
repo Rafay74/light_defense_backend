@@ -57,19 +57,19 @@ export class SettingController {
         } else {
           cb(
             new BadRequestException(
-              'Invalid file type. Only PDF, DOC, and DOCX are allowed.',
+              'Invalid file type. Only PDF, DOC, and DOCX are allowed.'
             ),
-            false,
+            false
           );
         }
       },
-    }),
+    })
   )
   @HttpCode(HttpStatus.CREATED)
   async submitSupportRequest(
     @Body() data: CreateSupportDto,
     @Request() req,
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File
   ) {
     const user_id = req.user.id;
     return await this.settingService.supportService(user_id, data, file);
