@@ -24,6 +24,7 @@ export class EmailService {
       const { email, code } = payload;
 
       if (!email || !code) {
+        // eslint-disable-next-line no-console
         console.warn('EmailService: Missing email or code');
         return;
       }
@@ -39,8 +40,10 @@ export class EmailService {
       };
 
       await this.transporter.sendMail(mailOptions);
+      // eslint-disable-next-line no-console
       console.log('OTP email sent successfully to:', email);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('EmailService: Failed to send OTP email', {
         error: error.message,
         email: payload?.email,

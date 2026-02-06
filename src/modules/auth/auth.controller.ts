@@ -61,7 +61,7 @@ export class AuthController {
   @UseGuards(JwtGuard)
   @HttpCode(HttpStatus.OK)
   async getCurrentUser(@Request() req) {
-    const user_id = req?.user.id;
+    const user_id = req?.user.id as string;
     return await this.authService.getCurrentUser(user_id);
   }
 }
