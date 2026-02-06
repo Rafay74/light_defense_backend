@@ -25,7 +25,9 @@ async function bootstrap() {
 
   const port = process.env.PORT ?? 6000;
   await app.listen(port);
+  // eslint-disable-next-line no-console
   console.log('Server is running on port:', port);
 }
 
-bootstrap();
+// eslint-disable-next-line no-console
+bootstrap().catch(console.error);
