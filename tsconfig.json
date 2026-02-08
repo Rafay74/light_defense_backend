@@ -20,6 +20,11 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@types": ["types/index.d.ts"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "types/**/*.d.ts"]
 }

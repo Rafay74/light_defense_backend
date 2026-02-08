@@ -1,17 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User, Otp, Rfq, Support } from './models';
+import { User, Otp, Rfq, Support, Proposal } from './models';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { EmailModule } from './modules/email/email.module';
 import { OtpModule } from './modules/otp/otp.module';
-import { RfqModule } from './rfq/rfq.module';
-import { SettingModule } from './setting/setting.module';
-
+import { RfqModule } from './modules/rfq/rfq.module';
+import { SettingModule } from './modules/setting/setting.module';
+import { ProposalModule } from './modules/proposal/proposal.module';
 @Module({
   imports: [
     ConfigModule.forRoot(),
@@ -26,10 +24,11 @@ import { SettingModule } from './setting/setting.module';
           username: configService.get('DB_USERNAME'),
           password: configService.get('DB_PASSWORD'),
           database: configService.get('DB_DATABASE'),
-          entities: [User, Otp, Rfq, Support],
+          entities: [User, Otp, Rfq, Support, Proposal],
           synchronize:
             configService.get('NODE_ENV') === 'development' ? true : false,
-          logging: true,
+          logging:
+            configService.get('NODE_ENV') === 'development' ? true : false,
         };
       },
       inject: [ConfigService],
@@ -40,8 +39,7 @@ import { SettingModule } from './setting/setting.module';
     OtpModule,
     RfqModule,
     SettingModule,
+    ProposalModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

@@ -1,11 +1,12 @@
 import {
   Column,
-  CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
   UpdateDateColumn,
+  OneToMany,
 } from 'typeorm';
-
+import { Proposal } from './proposal.entitiy';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
@@ -40,4 +41,7 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => Proposal, (proposal) => proposal.user)
+  proposals: Proposal[];
 }
