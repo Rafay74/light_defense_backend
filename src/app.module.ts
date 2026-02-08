@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User, Otp, Rfq, Support } from './models';
@@ -9,8 +7,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { EmailModule } from './modules/email/email.module';
 import { OtpModule } from './modules/otp/otp.module';
-import { RfqModule } from './rfq/rfq.module';
-import { SettingModule } from './setting/setting.module';
+import { RfqModule } from './modules/rfq/rfq.module';
+import { SettingModule } from './modules/setting/setting.module';
 
 @Module({
   imports: [
@@ -29,7 +27,8 @@ import { SettingModule } from './setting/setting.module';
           entities: [User, Otp, Rfq, Support],
           synchronize:
             configService.get('NODE_ENV') === 'development' ? true : false,
-          logging: true,
+          logging:
+            configService.get('NODE_ENV') === 'development' ? true : false,
         };
       },
       inject: [ConfigService],
@@ -41,7 +40,5 @@ import { SettingModule } from './setting/setting.module';
     RfqModule,
     SettingModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
